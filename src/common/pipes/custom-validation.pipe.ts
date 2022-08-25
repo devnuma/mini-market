@@ -17,7 +17,6 @@ export class CustomValidationPipe implements PipeTransform {
       const errors = await validate(valueClass, {
         stopAtFirstError: true,
         validationError: { target: false, value: false },
-        groups: ['some'],
       });
       if (errors?.length) {
         throw new HttpException(
