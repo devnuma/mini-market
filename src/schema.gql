@@ -1,0 +1,56 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  userId: String!
+  name: String!
+  email: String!
+  password: String!
+  roles: [String!]!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+type Query {
+  users(userIds: [String!], userId: String, name: String, email: String, roles: [Role!], limit: Int, offset: Int): [User]!
+  user(userId: String, name: String, email: String, roles: [Role!]): User
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+  SELLER
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(deleteUserInput: DeleteUserInput!): User!
+  login(loginAuthInput: LoginAuthInput!): LoginResponse!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  userId: String!
+}
+
+input DeleteUserInput {
+  userId: String!
+}
+
+input LoginAuthInput {
+  password: String!
+  email: String!
+}
