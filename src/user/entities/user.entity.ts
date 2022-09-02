@@ -9,7 +9,7 @@ export class User {
   _id: SchemaMongoose.Types.ObjectId;
 
   @Field()
-  @Prop()
+  @Prop({ required: true, index: true })
   userId: string;
 
   @Field()

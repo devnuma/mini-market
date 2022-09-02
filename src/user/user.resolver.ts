@@ -1,11 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  ResolveField,
-  Parent,
-} from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
@@ -16,12 +9,10 @@ import { GetUserArgs } from './dto/get-user.args';
 import { UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { RoleGuard } from 'src/auth/guards/role.guard';
-import { PermittedRoles } from 'src/auth/decorators/roles.decorator';
-import { Role } from 'src/common/constants/roles.constant';
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
   @Mutation(() => User, { nullable: true })
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
@@ -51,9 +42,4 @@ export class UserResolver {
   removeUser(@Args('deleteUserInput') { userId }: DeleteUserInput) {
     return this.userService.remove(userId);
   }
-
-  // @ResolveField()
-  // async follows(@Parent() user: User) {
-  //   const { userId } = user;
-  // }
 }
